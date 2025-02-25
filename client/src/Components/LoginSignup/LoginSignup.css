@@ -1,0 +1,180 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 20px; 
+  width: 90%; 
+  max-width: 600px; 
+  margin: 5vh auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+}
+
+.text {
+  margin-top: 10px;
+  color: #5461ae;
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.underline {
+  width: 61px;
+  height: 6px;
+  background: #5461ae;
+  border-radius: 9px;
+  margin-bottom: 27px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  width: 100%;
+  max-width: 350px; 
+  margin: auto; 
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.input i {
+  font-size: 1.2rem;
+  color: #555;
+  margin-right: 10px;
+}
+
+.input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  padding: 5px;
+  background: transparent;
+}
+
+.forgot-password {
+  margin-top: 27px;
+  color: #797979;
+  font-size: 18px;
+}
+
+.forgot-password span {
+  color: #5461ae;
+  cursor: pointer;
+}
+
+.submit-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 60px auto;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 59px;
+  color: #fff;
+  background: #5461ae;
+  border-radius: 50px;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gray {
+  flex: 1;
+  background: #EAEAEA;
+  color: #676767;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button {
+  width: 50px;
+  height: 25px;
+  background: #ccc;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 25px;
+}
+
+.toggle-button.active {
+  background: #285291;
+}
+
+.slider {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  transition: 0.3s;
+}
+
+.toggle-button.active .slider {
+  left: 25px;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  width: 100%;
+  max-width: 200px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 4px;
+  background-color: #335993;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #4a719a;
+}
+
+.toggle-text {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: 20px;
+}
