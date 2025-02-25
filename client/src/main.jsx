@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './Components/LandingPage/LandingPage.jsx'; 
-import LoginSignup from './Components/LoginSignup/LoginSignup.jsx'
+import Signup from './Components/LoginSignup/Signup.jsx'
+import Login from './Components/LoginSignup/Login.jsx'
 
 createRoot(document.getElementById('root')).render(
   <Router>
@@ -12,8 +13,11 @@ createRoot(document.getElementById('root')).render(
         {/* Route for landing page */}
         <Route path="/" element={<LandingPage />} />
 
-        {/* Route for login/signup page */}
-        <Route path="/login" element={<LoginSignup />} />
+        {/* Route for signup page */}
+        <Route path="/register" element={<Signup />} />
+
+        {/* Route for login page */}
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
 )
