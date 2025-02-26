@@ -8,7 +8,7 @@ const LandingPage = () => {
       <nav className="navbar">
         <div className="logo">StormEye</div>
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/relief">Relief Information</Link></li>
           <li><Link to="/login">Login/Sign Up</Link></li>
         </ul>
       </nav>
