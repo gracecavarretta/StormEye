@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginSignup.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import NavBar from "../NavBar/NavBar.jsx";
 
 export const Signup = () => {
   const [username, setUsername] = useState("");
@@ -23,7 +24,9 @@ export const Signup = () => {
   };
 
   return (
-    <div className="container">
+    <div>
+      <NavBar />
+      <div className="container">
       <div className="header">
         <div className="text">Sign Up</div>
         <div className="underline"></div>
@@ -70,6 +73,7 @@ export const Signup = () => {
         Already have an account?{' '}
         <span onClick={() => navigate('/login')}>Login here!</span>
       </div>
+    </div>
     </div>
   );
 };
