@@ -6,11 +6,12 @@ BABY BLUE: #b6d4e7
 OFF WHITE: #ebebeb
 GRAY: #b0b0b0
 */
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #5461ae;
+  background-color: #2a6a9e;
   padding: 15px 30px;
   color: #ebebeb;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -21,6 +22,8 @@ GRAY: #b0b0b0
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
+  text-decoration: none;
+  color: inherit
 }
 
 .navbar ul {
@@ -105,7 +108,7 @@ GRAY: #b0b0b0
   display: inline-block;
   margin-top: 20px;
   padding: 12px 30px;
-  background-color: #5461ae;
+  background-color: #2a6a9e;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -114,7 +117,7 @@ GRAY: #b0b0b0
 }
 
 .btn:hover {
-  background-color: #3e4a86;
+  background-color: #3882be;
   transform: translateY(-3px);
 }
 
