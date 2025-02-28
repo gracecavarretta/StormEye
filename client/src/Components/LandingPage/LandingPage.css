@@ -1,11 +1,99 @@
+/*COLORS
+DARK BLUE: #2a6a9e
+GRAY BLUE: #4682b4
+FADED BLUE: #5e99c5
+BABY BLUE: #b6d4e7
+OFF WHITE: #ebebeb
+GRAY: #b0b0b0
+*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5461ae;
+  padding: 15px 30px;
+  color: #ebebeb;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  height: 100%; /
+}
+
+.navbar ul li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar ul li a {
+  color: #ebebeb;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center; 
+  height: 100%;
+}
+
+.navbar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar ul li a.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+}
+
 .hero {
   text-align: center;
-  margin-top: 100px;
+  position: relative;
+}
+
+.hero-image-box {
+  position: relative;
+  display: inline-block;
+}
+.hero img{
+  height: auto;
+  width: 100%;
+  display: block;
 }
 
 .hero h1 {
-  font-size: 36px;
-  color: #333;
+  font-size: clamp(32px, 5vw, 70px);
+  color: #ebebeb;
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.7), 
+    -1px -1px 2px rgba(0, 0, 0, 0.7), 
+    1px -1px 2px rgba(0, 0, 0, 0.7), 
+    -1px 1px 2px rgba(0, 0, 0, 0.7), 
+    1px 1px 2px rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  
 }
 
 .hero p {
@@ -17,7 +105,7 @@
   display: inline-block;
   margin-top: 20px;
   padding: 12px 30px;
-  background-color: #5461ae;
+  background-color: #2a6a9e;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -26,7 +114,7 @@
 }
 
 .btn:hover {
-  background-color: #3e4a86;
+  background-color: #3882be;
   transform: translateY(-3px);
 }
 
