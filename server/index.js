@@ -2,6 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const UserModel = require('./models/User');
+const jwt = require('jsonwebtoken');
+//if we want to keep this secure, then we should put
+//the key ("WatchingWeather") in a .env file along
+//with the MongoDB password
+const SECRET_KEY = "WatchingWeather";
+
 
 const app = express();
 app.use(express.json());
@@ -17,7 +23,14 @@ app.post('/login', (req, res) => {
         .then(user => {
             if (user) {
                 if(user.password === password) {
-                    res.json("Success");
+                    //password is correct, so create a token with username and
+                    //email as the payload 
+                    jwt.sign({ id: user._id, email: user.email }, SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
+                        if (err) {
+                            return res.status(500).json({ message: 'Token generation failed' });
+                        }
+                        res.json({ token });
+                    });
                 } else {
                     res.status(400).json({ message: 'Incorrect password' });
                 }
@@ -28,6 +41,21 @@ app.post('/login', (req, res) => {
         .catch(err => res.status(400).json(err));
 });
 
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) return res.sendStatus(401); // No token provided
+
+    jwt.verify(token, SECRET_KEY, (err, user) => {
+        // Invalid token
+        if (err) return res.sendStatus(403);
+        // Attach the payload (e.g., user ID) to the request object
+        req.user = user; 
+        next();
+    });
+};
+
+
 app.post('/register', (req, res) => {
     console.log("Received data:", req.body);
     UserModel.create(req.body)
@@ -36,6 +64,38 @@ app.post('/register', (req, res) => {
             console.error('Error creating user:', err); 
             res.status(400).json(err); 
         });
+});
+
+// PUT endpoint to update notification preferences
+// The endpoint path has currently been set to /userDashboard
+// but this can change depending on frontend design
+app.put('/userDashboard', authenticateToken, (req, res) => {
+    //Retrieved from token payload by authenticateToken
+    const userId = req.user.id; 
+    //Expecting { preferences: { notifications: { ... } } }
+    //Note: Need to coordinate with frontend to determine what format
+    //information should be sent in
+    const { preferences } = req.body; 
+
+    //Update the preferences for the authenticated user
+    //findByIdAndUpdate is a built in mongo function
+    UserModel.findByIdAndUpdate(
+        userId,
+        //assuming info willl be sent in a preferences format
+        //see User.js for preferences structure
+        { preferences },
+        { new: true }
+    )
+    .then(user => {
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({ message: 'Preferences updated successfully', user });
+    })
+    .catch(err => {
+        console.error('Error updating preferences:', err);
+        res.status(500).json({ message: 'Error updating preferences' });
+    });
 });
 
 app.listen(3001, () => {
