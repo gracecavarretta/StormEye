@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import MainImage from "../../assets/images/LandingPageMainImage.jpg";
 import "./LandingPage.css";
+import "../RepeatedCSS/NavBar.css";
 
 const LandingPage = () => {
   return (
