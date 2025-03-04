@@ -4,9 +4,9 @@ import "./NavBar.css";
 const NavBar = () => {
   return (
     <nav className="navbar">
-        <div className="logo">StormEye</div>
+        <Link to="/" className="logo">StormEye</Link>
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/relief-page">Relief Information</Link></li>
           <li><Link to="/login">Login/Sign Up</Link></li>
         </ul>
       </nav>
