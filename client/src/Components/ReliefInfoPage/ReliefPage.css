@@ -2,8 +2,17 @@
 .h-relief {
     text-align: center;
     position: relative;
-    height: 40vh;
-    background-color: #4682b4;
+  }
+  .h-relief-image-box {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .h-relief img{
+    width: 100%;  /* Ensures it doesn’t go outside the viewport */
+    height: auto;
+    display: block;
   }
   
   .h-relief h1 {
@@ -41,19 +50,21 @@
     flex-direction: column;
     font-size: 20px;
     text-decoration: none;
-    color: white;
-    background: transparent;
+    background-color: #5e99c5;
   }
   .relief-box h2 {
     margin-top: 20px;
     font-weight: bold;
     margin-bottom: 20px;
-    font-size: 22px;
+    font-size: 30px;
     color: #ebebeb;
   }
   .relief-box p {
-    font-size: 14px;
+    font-size: 18px;
+    padding-left: 5%;
+    padding-right: 5%;
     color: #0f0f0f;
+    text-align: left;
     flex-grow: 1;
   }
   
@@ -66,7 +77,7 @@
     border-radius: 5px;
     font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   
   .relief-btn:hover {
