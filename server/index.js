@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-    UserModel.findOne({ email, password })
+    UserModel.findOne({ email })
         .then(user => {
             if (user) {
                 if (user.password === password) {
