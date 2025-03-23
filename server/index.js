@@ -1,3 +1,4 @@
+//loads the info from the .env file
 require('dotenv').config()
 
 const express = require('express');
