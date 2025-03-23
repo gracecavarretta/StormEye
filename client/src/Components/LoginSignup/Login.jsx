@@ -15,12 +15,13 @@ export const Login = () => {
     console.log(`Login form submitted!`);
     axios.post('http://localhost:3001/login', { email, password })
       .then(res => {
+        localStorage.setItem("token", res.data.token);
         console.log(res);
-        if (res.data === "Success") {
+        if (res.data.token) {
             navigate('/'); // TODO: Change to home page
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log('Axios Error:', err.response ? err.response.data : err.message))
   };
 
   return (

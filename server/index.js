@@ -3,14 +3,16 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const UserModel = require('./models/User');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const SECRET_KEY = process.env.SECRET_KEY;
-const MONGO_URI = process.env.MONGO_URI;
+// const MONGO_URI = process.env.MONGO_URI;
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+require('dotenv').config();
 
-mongoose.connect(MONGO_URI)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.error('Failed to connect to MongoDB', err));
 
@@ -22,7 +24,7 @@ app.post('/login', (req, res) => {
                 if (user.password === password) {
                     //password is correct, so create a token with username and
                     //email as the payload 
-                    jwt.sign({ id: user._id, email: user.email }, SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
+                    jwt.sign({ id: user.username, email: user.email }, SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
                         if (err) {
                             return res.status(500).json({ message: 'Token generation failed' });
                         }
