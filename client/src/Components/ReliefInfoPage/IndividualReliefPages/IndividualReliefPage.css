@@ -1,0 +1,75 @@
+/*COLORS
+DARK BLUE: #2a6a9e
+GRAY BLUE: #4682b4
+FADED BLUE: #5e99c5
+BABY BLUE: #b6d4e7
+OFF WHITE: #ebebeb
+GRAY: #b0b0b0
+*/
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.individual-relief-page {
+  background-color: #5e99c5;
+  min-height: 100vh;
+}
+.h-relief-individual {
+  text-align: center;
+  position: relative;
+}
+.h-relief-individual-image-box {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  height : 22vh;
+  overflow: hidden;
+}
+.h-relief-individual img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+  
+.h-relief-individual h1 {
+    font-size: clamp(32px, 5vw, 70px);
+    color: #ebebeb;
+    text-shadow: 
+      2px 2px 4px rgba(0, 0, 0, 0.7), 
+      -1px -1px 2px rgba(0, 0, 0, 0.7), 
+      1px -1px 2px rgba(0, 0, 0, 0.7), 
+      -1px 1px 2px rgba(0, 0, 0, 0.7), 
+      1px 1px 2px rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    
+  }
+.h-relief-individual-text-box {
+    padding: 25px;
+    margin: 20px 5% 20px; 
+    display: block;
+    color: #ebebeb;
+    text-align: left;
+  }
+  
+  .h-relief-individual h2{
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .h-relief-individual p {
+    font-size: 20px;
+    margin-left: 30px;
+  }
+  .h-relief-individual ul{
+    list-style-type: disc;
+    padding-left: 80px;
+    font-size: 20px;
+
+  }
