@@ -46,7 +46,7 @@ const LandingPage = () => {
     <div>
       <NavBar />
       <div className="hero">
-        <div class="hero-image-box">
+        <div className="hero-image-box">
           <img src={MainImage} />
           <h1>Your Universal Guide Through <br></br> the StormEye</h1>
         </div>
