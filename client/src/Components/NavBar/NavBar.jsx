@@ -19,9 +19,10 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-        <div className="logo">StormEye</div>
+        <Link to="/" className="logo">StormEye</Link>
         <ul>
           <li><Link to="/">Home</Link></li>
+          <li><Link to="/relief-page">Relief Information</Link></li>
         {isLoggedIn ? (
           <>
             <li><Link to="/user-dashboard">My Profile</Link></li>

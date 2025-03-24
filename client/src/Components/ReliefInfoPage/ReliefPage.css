@@ -1,57 +1,92 @@
-/* imported from landing page css */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #2a6a9e;
-  padding: 15px 30px;
-  color: #ebebeb;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 
-.navbar .logo {
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-decoration: none;
-  color: inherit
-}
+.h-relief {
+    text-align: center;
+    position: relative;
+  }
+  .h-relief-image-box {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .h-relief img{
+    width: 100%;  /* Ensures it doesn’t go outside the viewport */
+    height: auto;
+    display: block;
+  }
+  
+  .h-relief h1 {
+    font-size: clamp(32px, 5vw, 70px);
+    color: #ebebeb;
+    text-shadow: 
+      2px 2px 4px rgba(0, 0, 0, 0.7), 
+      -1px -1px 2px rgba(0, 0, 0, 0.7), 
+      1px -1px 2px rgba(0, 0, 0, 0.7), 
+      -1px 1px 2px rgba(0, 0, 0, 0.7), 
+      1px 1px 2px rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 0;
-  margin: 0;
-  height: 100%; /
-}
-
-.navbar ul li {
-  display: flex;
-  align-items: center;
-}
-
-.navbar ul li a {
-  color: #ebebeb;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center; 
-  height: 100%;
-}
-
-.navbar ul li a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.navbar ul li a.active {
-  background-color: rgba(255, 255, 255, 0.3);
-  font-weight: bold;
-}
+  .relief-container {
+    display: flex;
+    justify-content: center;
+    gap: 8vw;
+    padding: 40px;  
+  }
+  .relief-box {
+    width: 25%;
+    height: 400px;
+    border: 3px solid #0f0f0f;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    font-size: 20px;
+    text-decoration: none;
+    background-color: #5e99c5;
+  }
+  .relief-box h2 {
+    margin-top: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #ebebeb;
+  }
+  .relief-box p {
+    font-size: 18px;
+    padding-left: 5%;
+    padding-right: 5%;
+    color: #0f0f0f;
+    text-align: left;
+    flex-grow: 1;
+  }
+  
+  .relief-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #2a6a9e;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-bottom: 40px;
+  }
+  
+  .relief-btn:hover {
+    background-color: #3882be;
+    color: #0f0f0f;
+    transform: translateY(-3px);
+  }
+  
+  .btn:active, .btn:focus {
+    background-color: #47558d;
+    transform: translateY(1px);
+  }
