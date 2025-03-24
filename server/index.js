@@ -1,3 +1,6 @@
+//loads the info from the .env file
+require('dotenv').config()
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -10,13 +13,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(MONGO_URI)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.error('Failed to connect to MongoDB', err));
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-    UserModel.findOne({ email, password })
+    UserModel.findOne({ email })
         .then(user => {
             if (user) {
                 if (user.password === password) {
@@ -67,7 +70,7 @@ app.get('/user-info', authenticateToken, (req, res) => {
     UserModel.findById(req.user.id)
         .then(user => {
             if (!user) return res.status(404).json({ message: 'User not found' });
-            res.json({ username: user.username, email: user.email });
+            res.json({ username: user.username, email: user.email, preferences: user.preferences });
         })
         .catch(err => res.status(500).json(err));
 });
