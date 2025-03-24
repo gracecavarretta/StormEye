@@ -4,6 +4,9 @@ import axios from 'axios';
 import './UserPage.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import NavBar from "../NavBar/NavBar.jsx";
+import mapImage from './stateOfFL.png';
+import userImage from './userImage.jpg';
+
 
 export const UserPage = () => {
   const [user, setUser] = useState(null);
@@ -70,33 +73,83 @@ export const UserPage = () => {
   return (
     <div>
       <NavBar />
-      <div className="grid-layout">
-        <div className="map">Map</div>
-        <div className="adj-col">Map Settings, Quick Info/Search</div>
-        <div className="next-col">
-          <h2>User Account Info</h2>
-          {user ? (
-            <div>
-              <p><strong>Username:</strong> {user.username}</p>
-              <p><strong>Email:</strong> {user.email}</p>
-
-              <h3>Notification Preferences</h3>
-              {["trafficUpdates", "cityUpdates", "emergencyAlerts", "weatherUpdates"].map((key) => (
-                <div key={key} style={{ marginBottom: "10px" }}>
-                  <label><strong>{key}</strong>: </label>
-                  <select name={key} value={notifications[key]} onChange={handleChange}>
-                    <option value="off">Off</option>
-                    <option value="daily">Daily</option>
-                    <option value="immediate">Immediate</option>
-                  </select>
-                </div>
-              ))}
-
-              <button onClick={handleSubmit}>Save Preferences</button>
+      <div>
+        <div class="welcome">
+          <p1>
+            Welcome to StormEye!
+          </p1>
+        </div>
+    
+        <div class="row">
+          <div class="col">
+            <div className="map">
+              <img src={mapImage} alt="Map of Florida" />
             </div>
-          ) : (
-            <p>Loading user info...</p>
-          )}
+          </div>
+          <div class="col">
+            <div class="mapStg">
+            <div class="row">
+              <div class="col">
+                <div class="Stg">
+                  <p1>Map Settings</p1>
+                  <div class="setting-buttons">
+                    <button>Setting 1</button>
+                    <button>Setting 2</button>
+                    <button>Setting 3</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="quickInfo">
+                  <p1 class="matchText">Quick Info/Search</p1>
+                  <input type="text" class="search-bar" placeholder="Search..." />
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="quickRelief">
+              <p1 class="matchText">
+                Quick Relief Near Me
+              </p1>
+            </div>
+          </div>
+          <div class="col">
+            <div class="user">
+              <p1 class="matchText">User Settings</p1>
+              <img src={userImage} alt="User Profile Picture" />
+              <div className="next-col">
+              <h2 >User Account Info</h2>
+              {user ? (
+                <div>
+                  <p><strong>Username:</strong> {user.username}</p>
+                  <p><strong>Email:</strong> {user.email}</p>
+
+                  <h3>Notification Preferences</h3>
+                  <div className="notification-settings">
+                    {["trafficUpdates", "cityUpdates", "emergencyAlerts", "weatherUpdates"].map((key) => (
+                      <div className="notification-item" key={key}>
+                        <label htmlFor={key}>{key.replace(/([A-Z])/g, ' $1').trim()}</label>
+                        <select 
+                          id={key}
+                          name={key} 
+                          value={notifications[key]} 
+                          onChange={handleChange}
+                        >
+                          <option value="off">Off</option>
+                          <option value="daily">Daily</option>
+                          <option value="immediate">Immediate</option>
+                        </select>
+                      </div>
+                    ))}
+                  </div>
+                  <button class="savePref" onClick={handleSubmit}>Save Preferences</button>
+                </div>
+              ) : (
+                <p>Loading user info...</p>
+              )}
+            </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
