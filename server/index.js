@@ -70,7 +70,7 @@ app.get('/user-info', authenticateToken, (req, res) => {
     UserModel.findById(req.user.id)
         .then(user => {
             if (!user) return res.status(404).json({ message: 'User not found' });
-            res.json({ username: user.username, email: user.email });
+            res.json({ username: user.username, email: user.email, preferences: user.preferences });
         })
         .catch(err => res.status(500).json(err));
 });
