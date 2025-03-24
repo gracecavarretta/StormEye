@@ -19,9 +19,9 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <div className="logo">StormEye</div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
+        <div className="logo">StormEye</div>
+        <ul>
+          <li><Link to="/">Home</Link></li>
         {isLoggedIn ? (
           <>
             <li><Link to="/user-dashboard">My Profile</Link></li>
@@ -30,8 +30,8 @@ const NavBar = () => {
         ) : (
           <li><Link to="/login">Login/Sign Up</Link></li>
         )}
-      </ul>
-    </nav>
+        </ul>
+      </nav>
   )
 }
 
