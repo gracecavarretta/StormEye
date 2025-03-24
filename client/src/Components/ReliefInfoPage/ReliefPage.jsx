@@ -8,8 +8,8 @@ const ReliefPage = () => {
   return (
     <div>
       <NavBar />
-      <div className="h-relief">
-        <div class="h-relief-image-box">
+      <div className="hero">
+        <div class="hero-image-box">
           <img src={MainImage}/>
           <h1>Relief Information</h1>
         </div>
