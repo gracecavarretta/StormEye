@@ -50,21 +50,7 @@ const LandingPage = () => {
           <img src={MainImage} />
           <h1>Your Universal Guide Through <br></br> the StormEye</h1>
         </div>
-        {/* <Link to="/login" className="btn">Login/Sign Up</Link> */}
-        <input
-          type="latitude"
-          placeholder="latitude"
-          value={latitude}
-          onChange={(e) => setLatitude(e.target.value)}
-        />
-        <input
-          type="longitude"
-          placeholder="longitude"
-          value={longitude}
-          onChange={(e) => setLongitude(e.target.value)}
-        />
-        <button onClick={fetchAlerts}>Get Alerts</button>
-
+  
         {/* {alerts.length > 0 ? (
           <ul>
             {alerts.map((alert, index) => (
@@ -80,6 +66,23 @@ const LandingPage = () => {
         ) : (
           <p>No active alerts.</p>
         )} */}
+      </div>
+      <div class="myContainer">
+        <div class="longlat">
+          <input
+            type="latitude"
+            placeholder="Latitude"
+            value={latitude}
+            onChange={(e) => setLatitude(e.target.value)}
+          />
+          <input
+            type="longitude"
+            placeholder="Longitude"
+            value={longitude}
+            onChange={(e) => setLongitude(e.target.value)}
+          />
+        </div>
+        <button class="btn" onClick={fetchAlerts}>Get Alerts</button>
       </div>
     </div>
   );

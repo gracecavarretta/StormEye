@@ -68,3 +68,14 @@ GRAY: #b0b0b0
   background-color: #47558d;
   transform: translateY(1px);
 }
+
+.myContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.longlat {
+  margin-top: 17px;
+  margin-right: 10px;
+}
