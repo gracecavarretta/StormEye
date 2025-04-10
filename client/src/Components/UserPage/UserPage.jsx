@@ -73,57 +73,44 @@ export const UserPage = () => {
   return (
     <div>
       <NavBar />
-      <div>
-        <div class="welcome">
-          <p1>
-            Welcome to StormEye!
-          </p1>
-        </div>
-    
-        <div class="row">
-          <div class="col">
+      <div className="container-fluid py-4">
+        <h1 className="welcome">Welcome to StormEye!</h1>
+        <div className="row g-4 align-items-stretch">
+
+
+          <div class="col-12 col-md-6">
             <div className="map">
               <img src={mapImage} alt="Map of Florida" />
             </div>
           </div>
-          <div class="col">
-            <div class="mapStg">
-            <div class="row">
-              <div class="col">
-                <div class="Stg">
-                  <p1>Map Settings</p1>
-                  <div class="setting-buttons">
-                    <button>Setting 1</button>
-                    <button>Setting 2</button>
-                    <button>Setting 3</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="quickInfo">
-                  <p1 class="matchText">Quick Info/Search</p1>
-                  <input type="text" class="search-bar" placeholder="Search..." />
-                </div>
+
+          <div className="col-12 col-md-3 d-flex flex-column h-100">
+            <div className="box flex-grow-1 mb-4">
+              <h4 className="stgText">Map Settings</h4>
+              <div className="setting-buttons d-grid gap-2">
+                <button className="btn btn-primary">Setting 1</button>
+                <button className="btn btn-primary">Setting 2</button>
+                <button className="btn btn-primary">Setting 3</button>
               </div>
             </div>
-            </div>
-            <div class="quickRelief">
-              <p1 class="matchText">
-                Quick Relief Near Me
-              </p1>
+
+            <div className="qrBox">
+              <h4 className="stgText">Quick Relief Near Me</h4>
+              <input type="text" className="search-bar" placeholder="Search..." />
             </div>
           </div>
-          <div class="col">
+
+          <div class="col-12 col-md-3">
             <div class="user">
-              <p1 class="matchText">User Settings</p1>
+              <p1 className="stgText">User Settings</p1>
               <img src={userImage} alt="User Profile Picture" />
-              <div className="next-col">
               <h2 >User Account Info</h2>
               {user ? (
                 <div>
-                  <p><strong>Username:</strong> {user.username}</p>
-                  <p><strong>Email:</strong> {user.email}</p>
-
+                  <div className="user-info">
+                    <p><strong>Username:</strong> {user.username}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
+                  </div>
                   <h3>Notification Preferences</h3>
                   <div className="notification-settings">
                     {["trafficUpdates", "cityUpdates", "emergencyAlerts", "weatherUpdates"].map((key) => (
@@ -142,16 +129,15 @@ export const UserPage = () => {
                       </div>
                     ))}
                   </div>
-                  <button class="savePref" onClick={handleSubmit}>Save Preferences</button>
+                  <button className="savePref" onClick={handleSubmit}>Save Preferences</button>
                 </div>
               ) : (
                 <p>Loading user info...</p>
               )}
             </div>
-            </div>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
   );
 };
