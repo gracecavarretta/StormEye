@@ -93,49 +93,57 @@ const LandingPage = () => {
 
   return (
     <div>
-      <NavBar />
-      <div className="hero">
-        <div className="hero-image-box">
-          <img src={MainImage} />
-          <h1>Your Universal Guide Through <br></br> the StormEye</h1>
-        </div>
-        <div>
-          <select onChange={handleCityChange} defaultValue="">
-            <option value="" disabled>Select a city</option>
-            {cities.map((city) => (
-              <option key={city.name} value={city.name}>
-                {city.name}
-              </option>
-            ))}
-          </select>
+    <NavBar />
+    <div className="hero">
+      <div className="hero-image-box">
+        <img src={MainImage} alt="Storm Hero" />
+        <h1>Your Universal Guide Through <br /> the StormEye</h1>
+      </div>
 
-          {latitude !== null && longitude !== null && (
-            <div>
-              <p>Latitude: {latitude}</p>
-              <p>Longitude: {longitude}</p>
-            </div>
-          )}
-          <button className="btn" onClick={fetchAlerts}>Get Alerts</button>
-        </div>
+      {/* Location & Alert Section */}
+      <div className="location-section">
+        <select onChange={handleCityChange} defaultValue="">
+          <option value="" disabled>Select a city</option>
+          {cities.map((city) => (
+            <option key={city.name} value={city.name}>
+              {city.name}
+            </option>
+          ))}
+        </select>
 
-        {alerts.length > 0 ? (
-          <ul>
-            {alerts.map((alert, index) => (
-              <li key={index}>
-                <strong>{alert.event ?? "No event"}</strong> - {alert.description ?? "No description"}
-                <br />
-                <strong>Severity:</strong> {alert.severity ?? "Unknown"}
-                <br />
-                <strong>Instructions:</strong> {alert.instruction ?? "No instructions"}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No active alerts.</p>
+        {latitude && longitude && (
+          <div className="coords">
+            <p><strong>Latitude:</strong> {latitude}</p>
+            <p><strong>Longitude:</strong> {longitude}</p>
+          </div>
         )}
 
+        <button className="btn" onClick={fetchAlerts}>Get Alerts</button>
+
+        <div className="alerts">
+        {alerts.length > 0 ? (
+          <div className="info-box">
+            <ul>
+              {alerts.map((alert, index) => (
+                <li key={index}>
+                  <strong>{alert.event ?? "No event"}</strong> – {alert.description ?? "No description"}
+                  <br />
+                  <strong>Severity:</strong> {alert.severity ?? "Unknown"}
+                  <br />
+                  <strong>Instructions:</strong> {alert.instruction ?? "No instructions"}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <div className="info-box">
+            <p className="no-alerts">No active alerts.</p>
+          </div>
+        )}
+        </div>
       </div>
     </div>
+  </div>
   );
 };
 
