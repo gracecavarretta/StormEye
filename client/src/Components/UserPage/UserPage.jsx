@@ -88,6 +88,15 @@ export const UserPage = () => {
     return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${lon},${lat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
   };
 
+  const getStateMapUrl = () => {
+    const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
+    const centerLat = 28.0;
+    const centerLon = -82.0;
+    const zoom = 5; // Zoomed out to show full state
+    return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${centerLon},${centerLat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
+  };
+  
+
   return (
     <div>
       <NavBar />
@@ -101,7 +110,7 @@ export const UserPage = () => {
               src={
                 mapMode === "city" && latLon
                   ? getMapUrl(latLon.lat, latLon.lon)
-                  : mapImage
+                  : getStateMapUrl()
               }
               alt={mapMode === "city" ? selectedCity : "Map of Florida"}
               className="img-fluid"
