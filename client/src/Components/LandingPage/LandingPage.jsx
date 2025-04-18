@@ -88,8 +88,18 @@ const LandingPage = () => {
       setLatitude(selectedCity.lat);
       setLongitude(selectedCity.lon);
       console.log(`Selected: ${selectedCity.name} - Latitude: ${selectedCity.lat}, Longitude: ${selectedCity.lon}`);
+  
+      // ✅ Send selectedCity.name to backend
+      const token = localStorage.getItem("token");
+      axios.put("http://localhost:3001/userDashboard",
+        { selectedCity: selectedCity.name },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then(() => console.log("Selected city saved to backend"))
+      .catch(err => console.error("Failed to save selected city:", err));
     }
   };
+  
 
   return (
     <div>

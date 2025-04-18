@@ -70,7 +70,7 @@ app.get('/user-info', authenticateToken, (req, res) => {
     UserModel.findById(req.user.id)
         .then(user => {
             if (!user) return res.status(404).json({ message: 'User not found' });
-            res.json({ username: user.username, email: user.email, preferences: user.preferences });
+            res.json({ username: user.username, email: user.email, preferences: user.preferences, selectedCity: user.selectedCity });
         })
         .catch(err => res.status(500).json(err));
 });
@@ -94,15 +94,20 @@ app.put('/userDashboard', authenticateToken, (req, res) => {
     //Expecting { preferences: { notifications: { ... } } }
     //Note: Need to coordinate with frontend to determine what format
     //information should be sent in
-    const { preferences } = req.body;
+    const { preferences, selectedCity } = req.body;
+
+    const updateFields = {};
+    if (preferences) updateFields.preferences = preferences;
+    if (selectedCity) updateFields.selectedCity = selectedCity;
 
     //Update the preferences for the authenticated user
     //findByIdAndUpdate is a built in mongo function
     UserModel.findByIdAndUpdate(
         userId,
+        updateFields,
+    
         //assuming info willl be sent in a preferences format
         //see User.js for preferences structure
-        { preferences },
         { new: true }
     )
         .then(user => {

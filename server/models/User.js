@@ -26,7 +26,9 @@ const UserSchema = new mongoose.Schema({
       weatherUpdates: { type: String, enum: ["off", "immediate", "hourly"], default: "off" }
 
     }
-  }
+  },
+  //store the user selected city from the homepage
+  selectedCity: { type: String, required : false}
 });
 
 const UserModel = mongoose.model('User', UserSchema);

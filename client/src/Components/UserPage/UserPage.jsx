@@ -6,7 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import NavBar from "../NavBar/NavBar.jsx";
 import mapImage from './stateOfFL.png';
 import userImage from './userImage.jpg';
-
+import cities from './floridaCities.js';
 
 export const UserPage = () => {
   const [user, setUser] = useState(null);
@@ -16,6 +16,10 @@ export const UserPage = () => {
     emergencyAlerts: "immediate",
     weatherUpdates: "off"
   });
+
+  const [selectedCity, setSelectedCity] = useState("");
+  const [latLon, setLatLon] = useState(null);
+  const [mapMode, setMapMode] = useState("state");
 
   const navigate = useNavigate();
 
@@ -31,9 +35,17 @@ export const UserPage = () => {
     })
       .then(res => {
         setUser(res.data);
-        // OPTIONAL: If your backend returns preferences, pre-fill them
+
         if (res.data.preferences && res.data.preferences.notifications) {
           setNotifications(res.data.preferences.notifications);
+        }
+
+        setSelectedCity(res.data.selectedCity || "");
+        const match = cities.find(c => c.name === res.data.selectedCity);
+        console.log("Selected City:", res.data.selectedCity);
+        console.log("Matched city coords:", match);
+        if (match) {
+          setLatLon({ lat: match.lat, lon: match.lon });
         }
       })
       .catch(err => {
@@ -70,6 +82,21 @@ export const UserPage = () => {
     });
   };
 
+  const getMapUrl = (lat, lon) => {
+    const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
+    const zoom = 11;
+    return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${lon},${lat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
+  };
+
+  const getStateMapUrl = () => {
+    const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
+    const centerLat = 28.0;
+    const centerLon = -82.0;
+    const zoom = 5; // Zoomed out to show full state
+    return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${centerLon},${centerLat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
+  };
+  
+
   return (
     <div>
       <NavBar />
@@ -77,20 +104,34 @@ export const UserPage = () => {
         <h1 className="welcome">Welcome to StormEye!</h1>
         <div className="row g-4 align-items-stretch">
 
+        <div className="col-12 col-md-6">
+          <div className="map text-center">
+            <img
+              src={
+                mapMode === "city" && latLon
+                  ? getMapUrl(latLon.lat, latLon.lon)
+                  : getStateMapUrl()
+              }
+              alt={mapMode === "city" ? selectedCity : "Map of Florida"}
+              className="img-fluid"
+            />
 
-          <div class="col-12 col-md-6">
-            <div className="map">
-              <img src={mapImage} alt="Map of Florida" />
-            </div>
+            {selectedCity && (
+              <p className="selected-city-label mt-3">
+                <strong>📍 Selected City:</strong> {selectedCity}
+              </p>
+            )}
           </div>
+        </div>
+
 
           <div className="col-12 col-md-3 d-flex flex-column h-100">
             <div className="box flex-grow-1 mb-4">
               <h4 className="stgText">Map Settings</h4>
               <div className="setting-buttons d-grid gap-2">
-                <button className="btn btn-primary">Setting 1</button>
-                <button className="btn btn-primary">Setting 2</button>
-                <button className="btn btn-primary">Setting 3</button>
+                <button className="btn btn-primary" onClick={() => setMapMode("state")}>Display Entire State</button>
+                <button className="btn btn-primary" onClick={() => setMapMode("city")}>Display Selected City</button>
+                <button className="btn btn-primary" onClick={() => setMapMode("rain")}>Display Rain</button>
               </div>
             </div>
 
@@ -100,11 +141,11 @@ export const UserPage = () => {
             </div>
           </div>
 
-          <div class="col-12 col-md-3">
-            <div class="user">
+          <div className="col-12 col-md-3">
+            <div className="user">
               <p1 className="stgText">User Settings</p1>
               <img src={userImage} alt="User Profile Picture" />
-              <h2 >User Account Info</h2>
+              <h2>User Account Info</h2>
               {user ? (
                 <div>
                   <div className="user-info">
@@ -136,8 +177,9 @@ export const UserPage = () => {
               )}
             </div>
           </div>
+          
         </div>
-      </div> 
+      </div>
     </div>
   );
 };
