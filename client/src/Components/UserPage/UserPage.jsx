@@ -7,6 +7,7 @@ import NavBar from "../NavBar/NavBar.jsx";
 import mapImage from './stateOfFL.png';
 import userImage from './userImage.jpg';
 import cities from './floridaCities.js';
+import reliefCenters from './gainesvilleReliefCenters.js';
 
 export const UserPage = () => {
   const [user, setUser] = useState(null);
@@ -18,7 +19,9 @@ export const UserPage = () => {
   });
 
   const [selectedCity, setSelectedCity] = useState("");
+  const [selectedReliefCenter, setSelectedReliefCenter] = useState("");
   const [latLon, setLatLon] = useState(null);
+  const [reliefLatLon, setReliefLatLon] = useState(null);
   const [mapMode, setMapMode] = useState("state");
 
   const navigate = useNavigate();
@@ -26,7 +29,7 @@ export const UserPage = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/login');
+      navigate('/login'); // nora change to login
       return;
     }
 
@@ -46,6 +49,10 @@ export const UserPage = () => {
         console.log("Matched city coords:", match);
         if (match) {
           setLatLon({ lat: match.lat, lon: match.lon });
+//          const reliefMatch = reliefCenters.find(c => c.name === res.data.selectedReliefCenter);
+//          if(reliefMatch) {
+//            setReliefLatLon({ lat: reliefMatch.lat, lon: reliefMatch.lon });
+//          }
         }
       })
       .catch(err => {
@@ -85,6 +92,13 @@ export const UserPage = () => {
   const getMapUrl = (lat, lon) => {
     const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
     const zoom = 11;
+    /*
+    let marker = "";
+    if (reliefLat && reliefLon) {
+      marker = `&marker=lonlat:${reliefLon},${reliefLat};type:awesome;color:%23d81b60;size:large`;
+    }
+      */
+    // marker = `&marker=lonlat:${reliefLon},${reliefLat};type:awesome;color:%23d81b60;size:large` marker in link is causing the reload error?
     return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${lon},${lat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
   };
 
@@ -137,7 +151,21 @@ export const UserPage = () => {
 
             <div className="qrBox">
               <h4 className="stgText">Quick Relief Near Me</h4>
-              <input type="text" className="search-bar" placeholder="Search..." />
+              {selectedCity ==="Gainesville" ? (
+                <div className="relief-center-list">
+                  {reliefCenters.map((center, index) => (
+                    <div key={index} className="relief-center-item">
+                      <h5>{center.name}</h5>
+                      <p>Address: {center.address}</p>
+                      <p>Phone: {center.phone}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>No relief centers available for {selectedCity}.</p>
+              )} 
+
+              {/* <input type="text" className="search-bar" placeholder="Search..." /> */}
             </div>
           </div>
 

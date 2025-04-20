@@ -15,7 +15,7 @@ const useAuth = () => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(() => setIsAuthenticated(true))
-      .catch(() => setIsAuthenticated(false));
+      .catch(() => setIsAuthenticated(false)); // change
   }, []);
 
   return isAuthenticated;

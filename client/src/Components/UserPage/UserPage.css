@@ -204,6 +204,41 @@ body {
   transform: scale(1.05);
 }
 
+.relief-center-list {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.relief-center-item {
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.quickRelief {
+  width: 500px;
+  height: 375px;
+  padding: 20px;
+}
+
+.user {
+  margin-left: 20px;
+  width: 350px;
+  height: 700px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .footer {
   text-align: center;
   padding: 15px;
