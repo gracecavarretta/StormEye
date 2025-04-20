@@ -151,7 +151,21 @@ export const UserPage = () => {
 
             <div className="qrBox">
               <h4 className="stgText">Quick Relief Near Me</h4>
-              <input type="text" className="search-bar" placeholder="Search..." />
+              {selectedCity ==="Gainesville" ? (
+                <div className="relief-center-list">
+                  {reliefCenters.map((center, index) => (
+                    <div key={index} className="relief-center-item">
+                      <h5>{center.name}</h5>
+                      <p>Address: {center.address}</p>
+                      <p>Phone: {center.phone}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>No relief centers available for {selectedCity}.</p>
+              )} 
+
+              {/* <input type="text" className="search-bar" placeholder="Search..." /> */}
             </div>
           </div>
 

@@ -198,6 +198,20 @@ body {
   transform: scale(1.05);
 }
 
+.relief-center-list {
+  max-height: 250px;
+  overflow-y: auto;
+}
+.relief-center-item {
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 /*
 
 
