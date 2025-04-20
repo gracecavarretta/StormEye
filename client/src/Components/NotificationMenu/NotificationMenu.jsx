@@ -3,13 +3,14 @@ import "./NotificationMenu.css";
 
 const NotificationButton = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [notifications, setNotifications] = useState([]);
   const menuRef = useRef(null);
 
   const toggleMenu = () => {
     setShowMenu((prev) => !prev);
   };
 
-  // Close when clicking outside
+  // Close when clicking outside of notification menu
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -22,6 +23,18 @@ const NotificationButton = () => {
     };
   }, []);
 
+  //need a useEffect to fetch notifications from the server ask backend
+  useEffect(() => {
+    const fetchNotifications = async () => {
+    const response = await fetch("replace with where to get notifications");
+    const data = await response.json();
+     //console.log(data); // Handle the notifications data debugging
+    //console.error("Error fetching notifications:", error);
+      }
+    
+    fetchNotifications();
+  }, []);
+
   return (
     <div className="notification-container" ref={menuRef}>
       <button onClick={toggleMenu} className="notification-button">
@@ -31,9 +44,16 @@ const NotificationButton = () => {
         <div className="notification-menu">
           <div className="notification-header">Notifications</div>
           <ul className="notification-list">
-            <li>Alert 1</li>
-            <li>Alert 2</li>
-            <li>Alert 3</li>
+            {notifications.length === 0 ? (
+              <li>No new notifications</li>
+            ) : (
+              notifications.map((notification, index) => (
+                <li key={index}>
+                  {notification}
+                </li>
+
+              ))
+            )}
           </ul>
         </div>
       )}

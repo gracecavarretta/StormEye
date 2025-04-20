@@ -21,12 +21,13 @@
   .notification-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
-  
-  .notification-menu {
+  /* max 7 notifications*/
+  .notification-menu { 
     position: absolute;
     right: 0;
     top: 110%;
     width: 500px;
+    max-height: 500px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -45,7 +46,7 @@
   .notification-menu .notification-list {
     flex-direction: column;
     gap: 0;
-    max-height: 200px;
+    max-height: 500px;
     overflow-y: auto;
   }
   

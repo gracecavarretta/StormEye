@@ -9,7 +9,7 @@ const NavBar = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(true);
+    setIsLoggedIn(!!token);
   }, []);
 
   const handleLogout = () => {
