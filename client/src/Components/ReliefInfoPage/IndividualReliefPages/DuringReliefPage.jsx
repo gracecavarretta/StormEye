@@ -6,14 +6,17 @@ import MainImage from "../../../assets/images/DuringRelief.jpeg";
 
 const DuringReliefPage = () => {
   return (
-    <div className="individual-relief-page">
-      <NavBar />
+    <div className="wrapper">
+    <NavBar />
+
+    <main className="individual-relief-page">
       <div className="h-relief-individual">
-        <div class="h-relief-individual-image-box">
-          <img src={MainImage}/>
+        <div className="h-relief-individual-image-box">
+          <img src={MainImage} />
           <h1>During Relief Information</h1>
         </div>
-        <div class="h-relief-individual-text-box">
+
+        <div className="h-relief-individual-text-box">
           <h2>Living through the Storm</h2>
             <p>Once the storm arrives, staying 
               safe should be your top priority. Follow these
@@ -43,8 +46,14 @@ const DuringReliefPage = () => {
               </ul>
         </div>
       </div>
-    </div>
+    </main>
+
+    <footer className="footer">
+      <p>© 2025 StormEye. All rights reserved.</p>
+    </footer>
+  </div>
   );
 };
 
 export default DuringReliefPage;
+

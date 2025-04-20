@@ -25,47 +25,53 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <NavBar />
-      <div className="container">
-      <div className="header">
-        <div className="text">Login</div>
-        <div className="underline"></div>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="inputs">
-          <div className="input">
-            <i className="bi bi-envelope"></i>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input">
-            <i className="bi bi-lock"></i>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-        </div>
-        <div className="submit-container">
-          <button type="submit" className="submit-btn">Login</button>
-        </div>
-      </form>
+    <div className="wrapper">
+    <NavBar />
 
-      <div className="toggle-text">
-        Don't have an account?{' '}
-        <span onClick={() => navigate('/register')}>Register here!</span>
+    <main className="main-content">
+      <div className="container">
+        <div className="header">
+          <div className="text">Login</div>
+          <div className="underline"></div>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="inputs">
+            <div className="input">
+              <i className="bi bi-envelope"></i>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input">
+              <i className="bi bi-lock"></i>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          <div className="submit-container">
+            <button type="submit" className="submit-btn">Login</button>
+          </div>
+        </form>
+        <div className="toggle-text">
+          Don't have an account?{' '}
+          <span onClick={() => navigate('/register')}>Register here!</span>
+        </div>
       </div>
-    </div>
-    </div>
+    </main>
+
+    <footer className="footer">
+      <p>© 2025 StormEye. All rights reserved.</p>
+    </footer>
+  </div>
   );
 };
 

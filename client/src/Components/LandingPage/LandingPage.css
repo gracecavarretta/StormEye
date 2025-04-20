@@ -7,9 +7,19 @@ OFF WHITE: #ebebeb
 GRAY: #b0b0b0
 */
 
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .hero {
   text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #b6d4e7, #ebebeb);
 }
 
 .hero-image-box {
@@ -46,7 +56,6 @@ GRAY: #b0b0b0
   margin: 0;
   width: 100%;
   text-align: center;
-
 }
 
 .hero p {
@@ -67,7 +76,7 @@ GRAY: #b0b0b0
 }
 
 .btn:hover {
-  background-color: #3882be;
+  background-color: #2a6a9e;
   transform: translateY(-3px);
 }
 
@@ -89,13 +98,15 @@ GRAY: #b0b0b0
 }
 
 .location-section {
-  display: flex;
   flex-direction: column;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  /*gap: 15px;*/
+  padding: 20px 20px;
   margin: 40px auto;
-  padding: 30px 40px;
+  padding-top: 10px;
+  
   background: linear-gradient(to bottom, #b6d4e7, #ebebeb);
   /* or solid #b6d4e7 */
   border-radius: 16px;
@@ -129,7 +140,8 @@ GRAY: #b0b0b0
   background-color: #ffffff;
   padding: 25px 30px;
   border-radius: 12px;
-  max-width: 800px;
+  max-width: 1000px;
+  max-height: 400px;
   width: 90%;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
   text-align: left;
@@ -156,4 +168,16 @@ GRAY: #b0b0b0
   font-size: 16px;
   color: #555;
   text-align: center;
+}
+
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #2a6a9e;
+  color: white;
+  font-size: 14px;
+}
+
+.filterLabel {
+  color: #2a6a9e;
 }

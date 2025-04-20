@@ -1,3 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #b6d4e7, #ebebeb);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -177,4 +198,12 @@
   font-size: 14px;
   color: #555;
   margin-top: 20px;
+}
+
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #2a6a9e;
+  color: white;
+  font-size: 14px;
 }

@@ -6,15 +6,17 @@ import MainImage from "../../../assets/images/AfterRelief.jpeg";
 
 const AfterReliefPage = () => {
   return (
-    <div className="individual-relief-page">
-      <NavBar />
+    <div className="wrapper">
+    <NavBar />
+
+    <main className="individual-relief-page">
       <div className="h-relief-individual">
-        <div class="h-relief-individual-image-box">
-          <img src={MainImage}/>
+        <div className="h-relief-individual-image-box">
+          <img src={MainImage} />
           <h1>After Relief Information</h1>
         </div>
-        <div class="h-relief-individual-text-box">
-          <h2>Recovering from the Storm</h2>
+        <div className="h-relief-individual-text-box">
+        <h2>Recovering from the Storm</h2>
             <p>Once the storm has passed, the aftermath can still be 
               dangerous. It’s important to take careful steps to ensure 
               your safety, assess damage, and begin recovery.</p>
@@ -51,8 +53,15 @@ const AfterReliefPage = () => {
               </ul>
         </div>
       </div>
-    </div>
+    </main>
+
+    <footer className="footer">
+      <p>© 2025 StormEye. All rights reserved.</p>
+    </footer>
+  </div>
   );
 };
 
 export default AfterReliefPage;
+
+         
