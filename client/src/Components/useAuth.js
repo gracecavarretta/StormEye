@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true); //from nora make sure to CHANGE
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setIsAuthenticated(false);
+      setIsAuthenticated(true); // change
       return;
     }
 
@@ -15,7 +15,7 @@ const useAuth = () => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(() => setIsAuthenticated(true))
-      .catch(() => setIsAuthenticated(false));
+      .catch(() => setIsAuthenticated(true)); // change
   }, []);
 
   return isAuthenticated;

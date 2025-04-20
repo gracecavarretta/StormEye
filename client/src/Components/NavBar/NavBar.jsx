@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import "./NavBar.css";
+import NotificationButton from '../NotificationMenu/NotificationMenu';
 
 const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -8,7 +9,7 @@ const NavBar = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    setIsLoggedIn(true);
   }, []);
 
   const handleLogout = () => {
@@ -26,6 +27,7 @@ const NavBar = () => {
         {isLoggedIn ? (
           <>
             <li><Link to="/user-dashboard">My Profile</Link></li>
+            <NotificationButton />
             <li> <Link to="/logout" onClick={handleLogout} className="logout-link">Logout</Link></li>
           </>
         ) : (

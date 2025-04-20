@@ -26,7 +26,7 @@ export const UserPage = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/login');
+      navigate('/user-dashboard'); // nora change to login
       return;
     }
 
