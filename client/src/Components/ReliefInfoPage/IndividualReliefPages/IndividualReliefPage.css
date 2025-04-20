@@ -9,8 +9,17 @@ GRAY: #b0b0b0
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .individual-relief-page {
+  flex: 1;
   background-color: #5e99c5;
   min-height: 100vh;
 }
@@ -71,5 +80,12 @@ html, body {
     list-style-type: disc;
     padding-left: 80px;
     font-size: 20px;
+  }
 
+  .footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #2a6a9e;
+    color: white;
+    font-size: 14px;
   }

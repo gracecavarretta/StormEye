@@ -3,6 +3,12 @@ body {
   min-height: 100vh;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .welcome {
   margin-bottom: 25px;
   margin-left: 2px;
@@ -202,6 +208,7 @@ body {
   max-height: 250px;
   overflow-y: auto;
 }
+
 .relief-center-item {
   justify-content: space-between;
   align-items: center;
@@ -211,11 +218,6 @@ body {
   margin-bottom: 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
-
-/*
-
-
-
 
 .quickRelief {
   width: 500px;
@@ -235,140 +237,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.footer {
   text-align: center;
-}
-
-.user:hover {
-  transform: scale(1.03);
-}
-
-
-
-
-.user p {
-  font-size: 14px;
-  margin: 5px 0;
-  color: #333;
-}
-
-.notification-settings {
-  width: 100%;
-  text-align: left;
-  margin-top: 15px;
-}
-
-.notification-settings div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f8f9fa;
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease-in-out;
-}
-
-.notification-settings div:hover {
-  background: #e3f2fd;
-  transform: scale(1.02);
-}
-
-.notification-settings label {
-  font-weight: bold;
-  font-size: 14px;
-  color: #333;
-  flex: 1;
-}
-
-.notification-settings select {
-  padding: 6px 10px;
-  font-size: 14px;
-  border: 1px solid #0077b6;
-  border-radius: 6px;
-  background: white;
-  cursor: pointer;
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.notification-settings select:focus {
-  border-color: #00b4d8;
-  box-shadow: 0px 0px 8px rgba(0, 180, 216, 0.5);
-}
-
-
-.user button {
-  background: linear-gradient(135deg, #0077b6, #0096c7);
+  padding: 15px;
+  background-color: #2a6a9e;
   color: white;
-  font-weight: bold;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: all 0.3s ease-in-out;
+  font-size: 14px;
 }
-
-.user button:hover {
-  background: linear-gradient(135deg, #0096c7, #00b4d8);
-  transform: scale(1.05);
-}
-
-
-.user img {
-  width: 50%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.mapStg:hover, .quickRelief:hover, .user:hover {
-  transform: scale(1.02);
-}
-
-.Stg {
-  margin-top: 20px;
-  margin-left: 30px;
-  font-weight: bold;
-  color: #0077b6; 
-}
-
-.quickInfo {
-  margin-top: 21px;
-}
-
-button {
-  display: block;
-  margin-top: 10px;
-  background: linear-gradient(135deg, #0077b6, #0096c7);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-button:hover {
-  background: linear-gradient(135deg, #0096c7, #00b4d8);
-  transform: scale(1.05);
-}
-
-
-
-.savePref {
-  display: inline-block;
-  background-color: #0077b6;
-  color: white;
-  padding: 8px 16px; 
-  font-size: 14px;   
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-*/

@@ -112,7 +112,7 @@ export const UserPage = () => {
   
 
   return (
-    <div>
+    <div class="wrapper">
       <NavBar />
       <div className="container-fluid py-4">
         <h1 className="welcome">Welcome to StormEye!</h1>
@@ -208,6 +208,9 @@ export const UserPage = () => {
           
         </div>
       </div>
+      <footer className="footer text-center py-3">
+      <p>&copy; 2025 StormEye. All rights reserved.</p>
+    </footer>
     </div>
   );
 };

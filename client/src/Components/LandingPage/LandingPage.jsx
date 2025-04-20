@@ -9,8 +9,10 @@ const LandingPage = () => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [alerts, setAlerts] = useState([]);
-  const [forecast, setForecast] = useState(null);
+  const [selectedWarning, setSelectedWarning] = useState("All");
   const [error, setError] = useState(null);
+  const warningTypes = ["All", "Flood", "Hurricane", "Tornado", "Tropical Storm"];
+
   const cities = [
     { name: "Boca Raton", lat: 26.4, lon: -80.1 },
     { name: "Cape Canaveral", lat: 28.4, lon: -80.6 },
@@ -49,6 +51,7 @@ const LandingPage = () => {
     { name: "Titusville", lat: 28.6, lon: -80.8 },
     { name: "Vero Beach", lat: 27.6, lon: -80.4 },
     { name: "West Palm Beach", lat: 26.7, lon: -80.1 },
+    { name: "Little Rock", lat: 36.1551, lon: -95.9895 }
   ];
 
   const fetchAlerts = async () => {
@@ -58,23 +61,35 @@ const LandingPage = () => {
     }
 
     try {
-      const alertUrl = `https://api.weather.gov/alerts/active?point=${latitude},${longitude}`;
-      // const headers = { "User-Agent": "MyWeatherApp (myemail@example.com)" };
+      const pointUrl = `https://api.weather.gov/points/${latitude},${longitude}`;
+      const pointResponse = await axios.get(pointUrl);
+      const zone = pointResponse.data.properties.forecastZone.split('/').pop();
 
-      console.log("Fetching Alerts:", alertUrl);
-      const response = await axios.get(alertUrl);
+      const alertsUrl = `https://api.weather.gov/alerts/active?zone=${zone}`;
+      const alertsResponse = await axios.get(alertsUrl);
+      const alerts = alertsResponse.data.features;
 
-      if (response.data.features.length === 0) {
-        setAlerts([{ event: "No active alerts", description: "There are currently no alerts for this area." }]);
-      } else {
-        const alertsData = response.data.features.map((feature) => ({
-          event: feature.properties.event,
-          description: feature.properties.description,
-          severity: feature.properties.severity,
-          instruction: feature.properties.instruction,
-        }));
-        setAlerts(alertsData);
-      }
+      const filtered = selectedWarning === "All"
+        ? alerts
+        : alerts.filter(alert =>
+          alert.properties.event.toLowerCase().includes(selectedWarning.toLowerCase())
+        );
+
+      const rawAlerts = filtered.map((feature) => ({
+        event: feature.properties.event,
+        description: feature.properties.description,
+        severity: feature.properties.severity,
+        instruction: feature.properties.instruction,
+      }));
+
+      console.log("raw alerts for location: ", rawAlerts);
+      console.log("Zone ID:", zone);
+      console.log("Fetched alerts from API:", alerts);
+      console.log("Filtered alerts based on warning type:", filtered);
+      console.log("Final rawAlerts object:", rawAlerts);
+
+      setAlerts(rawAlerts);
+      setError("");
     } catch (err) {
       console.error("Error:", err);
       setError("Failed to fetch alerts. Please try again.");
@@ -89,7 +104,7 @@ const LandingPage = () => {
       setLongitude(selectedCity.lon);
       console.log(`Selected: ${selectedCity.name} - Latitude: ${selectedCity.lat}, Longitude: ${selectedCity.lon}`);
   
-      // ✅ Send selectedCity.name to backend
+      // send selectedCity.name to backend
       const token = localStorage.getItem("token");
       axios.put("http://localhost:3001/userDashboard",
         { selectedCity: selectedCity.name },
@@ -101,59 +116,73 @@ const LandingPage = () => {
   };
   
 
+  const filteredAlerts = alerts.filter((alert) =>
+    selectedWarning === "All" ? true : alert.event.includes(selectedWarning)
+  );
+
   return (
     <div>
-    <NavBar />
-    <div className="hero">
-      <div className="hero-image-box">
-        <img src={MainImage} alt="Storm Hero" />
-        <h1>Your Universal Guide Through <br /> the StormEye</h1>
-      </div>
+      <NavBar />
+      <div className="hero">
+        <div className="hero-image-box">
+          <img src={MainImage} alt="Storm Hero" />
+          <h1>Your Universal Guide Through <br /> the StormEye</h1>
+        </div>
+        <div className="location-section">
+          <select onChange={handleCityChange} defaultValue="">
+            <option value="" disabled>Select a city</option>
+            {cities.map((city) => (
+              <option key={city.name} value={city.name}>
+                {city.name}
+              </option>
+            ))}
+          </select>
 
-      {/* Location & Alert Section */}
-      <div className="location-section">
-        <select onChange={handleCityChange} defaultValue="">
-          <option value="" disabled>Select a city</option>
-          {cities.map((city) => (
-            <option key={city.name} value={city.name}>
-              {city.name}
-            </option>
-          ))}
-        </select>
+          {latitude && longitude && (
+            <div className="coords">
+              <p><strong>Latitude:</strong> {latitude}</p>
+              <p><strong>Longitude:</strong> {longitude}</p>
+            </div>
+          )}
 
-        {latitude && longitude && (
-          <div className="coords">
-            <p><strong>Latitude:</strong> {latitude}</p>
-            <p><strong>Longitude:</strong> {longitude}</p>
-          </div>
-        )}
-
-        <button className="btn" onClick={fetchAlerts}>Get Alerts</button>
-
-        <div className="alerts">
-        {alerts.length > 0 ? (
-          <div className="info-box">
-            <ul>
-              {alerts.map((alert, index) => (
-                <li key={index}>
-                  <strong>{alert.event ?? "No event"}</strong> – {alert.description ?? "No description"}
-                  <br />
-                  <strong>Severity:</strong> {alert.severity ?? "Unknown"}
-                  <br />
-                  <strong>Instructions:</strong> {alert.instruction ?? "No instructions"}
-                </li>
+          <div style={{ marginTop: "10px" }}>
+            <label class="filterLabel">Filter by disaster type:</label>
+            <select onChange={(e) => setSelectedWarning(e.target.value)} value={selectedWarning}>
+              {warningTypes.map((type) => (
+                <option key={type} value={type}>{type}</option>
               ))}
-            </ul>
+            </select>
           </div>
-        ) : (
-          <div className="info-box">
-            <p className="no-alerts">No active alerts.</p>
+
+          <button className="btn" onClick={fetchAlerts}>Get Alerts</button>
+
+          <div className="alerts">
+            {filteredAlerts.length > 0 ? (
+              <div className="info-box">
+                <ul>
+                  {filteredAlerts.map((alert, index) => (
+                    <li key={index}>
+                      <strong>{alert.event ?? "No event"}</strong> – {alert.description ?? "No description"}
+                      <br />
+                      <strong>Severity:</strong> {alert.severity ?? "Unknown"}
+                      <br />
+                      <strong>Instructions:</strong> {alert.instruction ?? "No instructions"}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <div className="info-box">
+                <p className="no-alerts">No active alerts.</p>
+              </div>
+            )}
           </div>
-        )}
         </div>
       </div>
+      <footer className="footer">
+      <p>© 2025 StormEye. All rights reserved.</p>
+      </footer>
     </div>
-  </div>
   );
 };
 

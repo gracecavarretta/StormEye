@@ -6,14 +6,13 @@ import MainImage from "../../assets/images/ReliefPageMainImage.jpg";
 //
 const ReliefPage = () => {
   return (
-    <div>
+    <div className="wrapper">
       <NavBar />
       <div className="hero">
-        <div class="hero-image-box">
-          <img src={MainImage}/>
+        <div className="hero-image-box">
+          <img src={MainImage} alt="Relief" />
           <h1>Relief Information</h1>
         </div>
-      </div>
       <div className="relief-container">
         <div className="relief-box">
           <h2>Before a Disaster</h2>
@@ -41,6 +40,11 @@ const ReliefPage = () => {
           <Link to="/relief-after" className="relief-btn">Learn More</Link>
         </div>
       </div>
+      </div>
+      <footer className="footer">
+      <p>© 2025 StormEye. All rights reserved.</p>
+      </footer>
+
     </div>
   );
 };
