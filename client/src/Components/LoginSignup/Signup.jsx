@@ -24,56 +24,42 @@ export const Signup = () => {
   };
 
   return (
-    <div>
+    <div class="wrapper">
       <NavBar />
-      <div className="container">
-      <div className="header">
-        <div className="text">Sign Up</div>
-        <div className="underline"></div>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="inputs">
-          <div className="input">
-            <i className="bi bi-person"></i>
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+      <main className="main-content">
+        <div className="container">
+          <div className="header">
+            <div className="text">Sign Up</div>
+            <div className="underline"></div>
           </div>
-          <div className="input">
-            <i className="bi bi-envelope"></i>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input">
-            <i className="bi bi-lock"></i>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <form onSubmit={handleSubmit}>
+            <div className="inputs">
+              <div className="input">
+                <i className="bi bi-person"></i>
+                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+              </div>
+              <div className="input">
+                <i className="bi bi-envelope"></i>
+                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              </div>
+              <div className="input">
+                <i className="bi bi-lock"></i>
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              </div>
+            </div>
+            <div className="submit-container">
+              <button type="submit" className="submit-btn">Sign Up</button>
+            </div>
+          </form>
+          <div className="toggle-text">
+            Already have an account? <span onClick={() => navigate('/login')}>Login here!</span>
           </div>
         </div>
-        <div className="submit-container">
-          <button type="submit" className="submit-btn">Sign Up</button>
-        </div>
-      </form>
+      </main>
 
-      <div className="toggle-text">
-        Already have an account?{' '}
-        <span onClick={() => navigate('/login')}>Login here!</span>
-      </div>
-    </div>
+      <footer className="footer">
+      <p>© 2025 StormEye. All rights reserved.</p>
+    </footer>
     </div>
   );
 };

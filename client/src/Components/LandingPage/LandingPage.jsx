@@ -104,7 +104,7 @@ const LandingPage = () => {
       setLongitude(selectedCity.lon);
       console.log(`Selected: ${selectedCity.name} - Latitude: ${selectedCity.lat}, Longitude: ${selectedCity.lon}`);
   
-      // ✅ Send selectedCity.name to backend
+      // send selectedCity.name to backend
       const token = localStorage.getItem("token");
       axios.put("http://localhost:3001/userDashboard",
         { selectedCity: selectedCity.name },
@@ -128,7 +128,6 @@ const LandingPage = () => {
           <img src={MainImage} alt="Storm Hero" />
           <h1>Your Universal Guide Through <br /> the StormEye</h1>
         </div>
-
         <div className="location-section">
           <select onChange={handleCityChange} defaultValue="">
             <option value="" disabled>Select a city</option>
@@ -147,7 +146,7 @@ const LandingPage = () => {
           )}
 
           <div style={{ marginTop: "10px" }}>
-            <label>Filter by disaster type:</label>
+            <label class="filterLabel">Filter by disaster type:</label>
             <select onChange={(e) => setSelectedWarning(e.target.value)} value={selectedWarning}>
               {warningTypes.map((type) => (
                 <option key={type} value={type}>{type}</option>
@@ -180,6 +179,9 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
+      <footer className="footer">
+      <p>© 2025 StormEye. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
