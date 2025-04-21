@@ -21,7 +21,6 @@ export const UserPage = () => {
   });
 
   const [selectedCity, setSelectedCity] = useState("");
-  const [selectedReliefCenter, setSelectedReliefCenter] = useState("");
   const [latLon, setLatLon] = useState(null);
   const [selectedCenterIndex, setSelectedCenterIndex] = useState(null);
   const [mapMode, setMapMode] = useState("state");
@@ -31,7 +30,7 @@ export const UserPage = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/login'); // nora change to login
+      navigate('/login');
       return;
     }
 
@@ -87,38 +86,6 @@ export const UserPage = () => {
     });
   };
 
-  //static map
-  // const getMapUrl = (lat, lon) => {
-  //   const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
-  //   const zoom = 11;
-  //   const base = `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${lon},${lat}&zoom=${zoom}&scaleFactor=2`;
-  
-  //   // Add markers for relief centers
-  //   let markerParams = [];
-  
-  //   // If city is Gainesville, add relief center markers
-  //   if (selectedCity === "Gainesville") {
-  //     reliefCenters.forEach((center,index) => {
-  //       const isSelected = index === selectedCenterIndex;
-  //       const markerColor = isSelected ? "%232a6a9e" : "%23000000"; // red if selected, blue otherwise
-  //       markerParams.push(`lonlat:${center.lon},${center.lat};type:awesome;color:${markerColor};size:small;icon:hands-helping`);
-  //     });
-  //   }
-  
-  //   const markersString = markerParams.map(m => `&marker=${m}`).join('');
-  
-  //   return `${base}${markersString}&apiKey=${apiKey}`;
-  // };
-
-  // const getStateMapUrl = () => {
-  //   const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
-  //   const centerLat = 28.0;
-  //   const centerLon = -82.0;
-  //   const zoom = 5; // Zoomed out to show full state
-  //   return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${centerLon},${centerLat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
-  // };
-  
-
   return (
     <div class="wrapper">
       <NavBar />
@@ -128,6 +95,7 @@ export const UserPage = () => {
 
         <div className="col-12 col-md-6">
           <div className="map text-center">
+            {/*calling the dynamic map component*/}
             <DynamicMap
               selectedCity={selectedCity}
               selectedCenterIndex={selectedCenterIndex}
@@ -156,6 +124,7 @@ export const UserPage = () => {
 
             <div className="qrBox">
               <h4 className="stgText">Quick Relief Near Me</h4>
+              {/*Looks in the relief centers js file and searches if the selected city is there*/}
               {reliefCenters[selectedCity] ? (
                 <div className="relief-center-list">
                   {reliefCenters[selectedCity].map((center, index) => (
@@ -171,7 +140,6 @@ export const UserPage = () => {
                 <p>No relief centers available for {selectedCity}.</p>
               )} 
 
-              {/* <input type="text" className="search-bar" placeholder="Search..." /> */}
             </div>
           </div>
 
@@ -216,6 +184,7 @@ export const UserPage = () => {
       </div>
       <footer className="footer text-center py-3">
       <p>&copy; 2025 StormEye. All rights reserved.</p>
+
     </footer>
     </div>
   );
