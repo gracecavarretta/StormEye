@@ -10,6 +10,10 @@ import BeforeReliefPage from './Components/ReliefInfoPage/IndividualReliefPages/
 import DuringReliefPage from './Components/ReliefInfoPage/IndividualReliefPages/DuringReliefPage.jsx';
 import AfterReliefPage from './Components/ReliefInfoPage/IndividualReliefPages/AfterReliefPage.jsx';
 
+//from nora
+import 'leaflet/dist/leaflet.css';
+
+
 function App() {
   return (
     <Router>

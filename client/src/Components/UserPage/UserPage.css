@@ -218,6 +218,10 @@ body {
   margin-bottom: 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+.relief-center-item.selected {
+  background-color: #007acc;
+  color: white;
+}
 
 .quickRelief {
   width: 500px;
