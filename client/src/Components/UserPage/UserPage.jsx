@@ -7,7 +7,9 @@ import NavBar from "../NavBar/NavBar.jsx";
 import mapImage from './stateOfFL.png';
 import userImage from './userImage.jpg';
 import cities from './floridaCities.js';
-import reliefCenters from './gainesvilleReliefCenters.js';
+import reliefCenters from './ReliefCenters.js';
+
+import DynamicMap from "../DynamicMap/DynamicMap.jsx" // Adjust the import path as necessary
 
 export const UserPage = () => {
   const [user, setUser] = useState(null);
@@ -21,7 +23,7 @@ export const UserPage = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedReliefCenter, setSelectedReliefCenter] = useState("");
   const [latLon, setLatLon] = useState(null);
-  const [reliefLatLon, setReliefLatLon] = useState(null);
+  const [selectedCenterIndex, setSelectedCenterIndex] = useState(null);
   const [mapMode, setMapMode] = useState("state");
 
   const navigate = useNavigate();
@@ -49,10 +51,6 @@ export const UserPage = () => {
         console.log("Matched city coords:", match);
         if (match) {
           setLatLon({ lat: match.lat, lon: match.lon });
-//          const reliefMatch = reliefCenters.find(c => c.name === res.data.selectedReliefCenter);
-//          if(reliefMatch) {
-//            setReliefLatLon({ lat: reliefMatch.lat, lon: reliefMatch.lon });
-//          }
         }
       })
       .catch(err => {
@@ -89,26 +87,36 @@ export const UserPage = () => {
     });
   };
 
-  const getMapUrl = (lat, lon) => {
-    const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
-    const zoom = 11;
-    /*
-    let marker = "";
-    if (reliefLat && reliefLon) {
-      marker = `&marker=lonlat:${reliefLon},${reliefLat};type:awesome;color:%23d81b60;size:large`;
-    }
-      */
-    // marker = `&marker=lonlat:${reliefLon},${reliefLat};type:awesome;color:%23d81b60;size:large` marker in link is causing the reload error?
-    return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${lon},${lat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
-  };
+  //static map
+  // const getMapUrl = (lat, lon) => {
+  //   const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
+  //   const zoom = 11;
+  //   const base = `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${lon},${lat}&zoom=${zoom}&scaleFactor=2`;
+  
+  //   // Add markers for relief centers
+  //   let markerParams = [];
+  
+  //   // If city is Gainesville, add relief center markers
+  //   if (selectedCity === "Gainesville") {
+  //     reliefCenters.forEach((center,index) => {
+  //       const isSelected = index === selectedCenterIndex;
+  //       const markerColor = isSelected ? "%232a6a9e" : "%23000000"; // red if selected, blue otherwise
+  //       markerParams.push(`lonlat:${center.lon},${center.lat};type:awesome;color:${markerColor};size:small;icon:hands-helping`);
+  //     });
+  //   }
+  
+  //   const markersString = markerParams.map(m => `&marker=${m}`).join('');
+  
+  //   return `${base}${markersString}&apiKey=${apiKey}`;
+  // };
 
-  const getStateMapUrl = () => {
-    const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
-    const centerLat = 28.0;
-    const centerLon = -82.0;
-    const zoom = 5; // Zoomed out to show full state
-    return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${centerLon},${centerLat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
-  };
+  // const getStateMapUrl = () => {
+  //   const apiKey = "461c4e3a5bcc43beaeb5aa528bf46f0a";
+  //   const centerLat = 28.0;
+  //   const centerLon = -82.0;
+  //   const zoom = 5; // Zoomed out to show full state
+  //   return `https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=600&height=400&center=lonlat:${centerLon},${centerLat}&zoom=${zoom}&scaleFactor=2&apiKey=${apiKey}`;
+  // };
   
 
   return (
@@ -120,15 +128,12 @@ export const UserPage = () => {
 
         <div className="col-12 col-md-6">
           <div className="map text-center">
-            <img
-              src={
-                mapMode === "city" && latLon
-                  ? getMapUrl(latLon.lat, latLon.lon)
-                  : getStateMapUrl()
-              }
-              alt={mapMode === "city" ? selectedCity : "Map of Florida"}
-              className="img-fluid"
-            />
+            <DynamicMap
+              selectedCity={selectedCity}
+              selectedCenterIndex={selectedCenterIndex}
+              setSelectedCenterIndex={setSelectedCenterIndex}
+              latLon={latLon}
+              mapMode={mapMode}/>
 
             {selectedCity && (
               <p className="selected-city-label mt-3">
@@ -151,10 +156,11 @@ export const UserPage = () => {
 
             <div className="qrBox">
               <h4 className="stgText">Quick Relief Near Me</h4>
-              {selectedCity ==="Gainesville" ? (
+              {reliefCenters[selectedCity] ? (
                 <div className="relief-center-list">
-                  {reliefCenters.map((center, index) => (
-                    <div key={index} className="relief-center-item">
+                  {reliefCenters[selectedCity].map((center, index) => (
+                    <div key={index} className={`relief-center-item ${selectedCenterIndex === index ? 'selected' : ''}`} 
+                    onClick={() => setSelectedCenterIndex(index)}>
                       <h5>{center.name}</h5>
                       <p>Address: {center.address}</p>
                       <p>Phone: {center.phone}</p>
